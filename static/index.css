@@ -1,0 +1,119 @@
+body {
+  background-color: #000000;
+  color: white;
+  font-family: Arial, sans-serif;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  height: 100vh;
+  margin: 0;
+}
+.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  /* background-color: aqua; */
+}
+
+.container {
+  width: 60vw;
+  height: 50vh;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #333;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 98%;
+  height: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  resize: none;
+  margin-bottom: 15px;
+  background-color: #2e2e2e;
+  color: white;
+}
+
+button {
+  width: 50%;
+  height: 2.9rem;
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transform: translatex(50%);
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.result-box {
+  margin-top: 15px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.spam {
+  background-color: #ff4d4d;
+  font-size: 38px;
+}
+
+.not-spam {
+  background-color: #4da6ff;
+    font-size: 38px;
+}
+nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+nav img{
+  height: 150px;
+
+}
+.register button{
+  /* margin-right: 10px; */
+  padding: 10px 20px;
+  width: 150px;
+  height: 50px;
+  font-size: 16px;
+  border: 2px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #000000;
+  color: white;
+  
+
+} 
+.register button:hover{
+  background-color: white;
+  color: black;
+}
+.register{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  width:400px;
+  /* background-color: aqua; */
+}

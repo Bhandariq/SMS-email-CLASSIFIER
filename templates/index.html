@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Email/SMS Spam Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
+  </head>
+  <body>
+    <nav>
+      <img src="{{ url_for('static', filename='favicon.png') }}" alt>
+      <div class="register">
+        <button class="log">SignUp</button>
+        <button class="log">Login</button>
+
+      </div>
+    </nav>
+    <div class="main">
+      <form method="POST" class="container">
+        <h1>Email/SMS Spam Classifier</h1>
+        <label for="message"><b>Enter the message</b></label>
+        <textarea id="message"
+          placeholder="Type your message here..."  name="message"></textarea>
+        <button type="submit">Predict</button>
+        <div id="result" class="result-box">
+          {% if prediction is not none %}
+            {% if prediction == 1 %}
+              <p class = "spam"><b>Spam </b></p>
+              {% else %}
+              <p class = "not-spam"><b>Not Spam</b></p>
+            {% endif %}
+          {% endif %}
+        </div>
+      </form>
+    </div>
+
+    <script>
+    
+  </script>
+  </body>
+</html>

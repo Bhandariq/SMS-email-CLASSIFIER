@@ -1,7 +1,7 @@
-"""Methods for scaling, centering, normalization, binarization, and more."""
-
-# Authors: The scikit-learn developers
-# SPDX-License-Identifier: BSD-3-Clause
+"""
+The :mod:`sklearn.preprocessing` module includes scaling, centering,
+normalization, binarization methods.
+"""
 
 from ._data import (
     Binarizer,
@@ -37,27 +37,27 @@ __all__ = [
     "KernelCenterer",
     "LabelBinarizer",
     "LabelEncoder",
-    "MaxAbsScaler",
-    "MinMaxScaler",
     "MultiLabelBinarizer",
+    "MinMaxScaler",
+    "MaxAbsScaler",
+    "QuantileTransformer",
     "Normalizer",
     "OneHotEncoder",
     "OrdinalEncoder",
-    "PolynomialFeatures",
     "PowerTransformer",
-    "QuantileTransformer",
     "RobustScaler",
     "SplineTransformer",
     "StandardScaler",
     "TargetEncoder",
     "add_dummy_feature",
+    "PolynomialFeatures",
     "binarize",
-    "label_binarize",
+    "normalize",
+    "scale",
+    "robust_scale",
     "maxabs_scale",
     "minmax_scale",
-    "normalize",
-    "power_transform",
+    "label_binarize",
     "quantile_transform",
-    "robust_scale",
-    "scale",
+    "power_transform",
 ]

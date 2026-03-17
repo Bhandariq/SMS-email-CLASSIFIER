@@ -72,16 +72,16 @@ nav{
 /* Input box bigger by 6px */
 textarea {
   flex: 1;
-  padding: 16px;        /* was 10px → +6px */
-  font-size: 18px;      /* thoda bada text */
+  padding: 16px;       
+  font-size: 25px;      
   border-radius: 8px;
   border: none;
 }
 
-/* Send button bigger by 5px */
+
 button {
-  padding: 15px 20px;   /* was 10px 15px → +5px */
-  font-size: 17px;      /* thoda bada text */
+  padding: 15px 20px;  
+  font-size: 17px;      
   border: none;
   border-radius: 8px;
   background: #3b82f6;

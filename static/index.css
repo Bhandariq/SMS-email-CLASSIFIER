@@ -91,3 +91,8 @@ button{
   justify-content:space-between;
   font-size:14px;
 }
+.bg { z-index: -1; }
+
+.spam-outline {
+  border: 2px solid red;
+}

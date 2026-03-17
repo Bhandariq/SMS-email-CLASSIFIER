@@ -24,7 +24,7 @@
 
   <!-- INPUT -->
   <div class="input-bar">
-    <textarea id="msg" placeholder="Type your message..."></textarea>
+    <input id="msg" type="text" placeholder="Type your message..." autofocus />
     <button id="send">Send</button>
   </div>
 
@@ -42,15 +42,18 @@ const chat = document.getElementById("chat");
 const btn = document.getElementById("send");
 const input = document.getElementById("msg");
 
-function addMessage(text, type){
+function addMessage(text, type, outlineClass=""){
   const div = document.createElement("div");
   div.className = "msg " + type;
   div.innerText = text;
+  if(outlineClass){
+    div.classList.add(outlineClass); // add outline class if provided
+  }
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
 }
 
-btn.onclick = async () => {
+async function sendMessage() {
   const text = input.value.trim();
   if(!text) return;
 
@@ -65,18 +68,34 @@ btn.onclick = async () => {
   const res = await fetch("/predict", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({message: text})
+    body: JSON.stringify({text: text})
   });
 
   const data = await res.json();
   loader.remove();
 
-  addMessage(data.pretty, "bot");
+  // backend sends "Spam" or "Ham"
+  let outlineClass = "";
+  if (data.label && data.label.toLowerCase() === "spam") {
+    outlineClass = "spam-outline";
+  }
+
+  addMessage(data.pretty, "bot", outlineClass);
 
   document.getElementById("total").innerText = data.stats.total;
   document.getElementById("spam").innerText = data.stats.spam;
   document.getElementById("ham").innerText = data.stats.ham;
-};
+}
+
+btn.onclick = sendMessage;
+
+// allow Enter key to send message
+input.addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    sendMessage();
+  }
+});
 
 // theme toggle
 document.getElementById("themeToggle").onclick = () => {

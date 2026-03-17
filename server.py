@@ -7,27 +7,23 @@ import os
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
-# safe download (important for Render)
-nltk.download('stopwords', quiet=True)
+# ---- NLTK SAFE LOAD (works on Render) ----
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords', download_dir='/tmp')
+    nltk.data.path.append('/tmp')
 
 app = Flask(__name__)
 
-# -----------------------------
-# LOAD MODEL SAFELY
-# -----------------------------
-try:
-    model = pickle.load(open("NB_spam_model.pkl", "rb"))
-    vectorizer = pickle.load(open("transform.pkl", "rb"))
-except Exception as e:
-    print("❌ Error loading model:", e)
+# ---- LOAD MODEL SAFELY ----
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model = pickle.load(open(os.path.join(BASE_DIR, "NB_spam_model.pkl"), "rb"))
+vectorizer = pickle.load(open(os.path.join(BASE_DIR, "transform.pkl"), "rb"))
 
-# -----------------------------
-# PREPROCESSING SETUP
-# -----------------------------
+# ---- PREPROCESS ----
 ps = PorterStemmer()
 stop_words = set(stopwords.words("english"))
-
-history = []
 
 def clean_text(text):
     text = str(text).lower()
@@ -36,70 +32,46 @@ def clean_text(text):
     words = [ps.stem(w) for w in words if w not in stop_words]
     return " ".join(words)
 
-# -----------------------------
-# HOME ROUTE
-# -----------------------------
-@app.route("/", methods=["GET", "POST"])
+# ---- SESSION STATS (in-memory) ----
+stats = {"total": 0, "spam": 0, "ham": 0}
+
+@app.route("/")
 def home():
-    global history
+    return render_template("index.html")
 
-    if request.method == "POST":
-        message = request.form.get("message", "")
-
-        if message.strip() == "":
-            return render_template("index.html", prediction="⚠️ Enter a message", history=history)
-
-        try:
-            cleaned = clean_text(message)
-            vector = vectorizer.transform([cleaned])
-
-            result = model.predict(vector)[0]
-            prob = model.predict_proba(vector)[0]
-            confidence = round(max(prob) * 100, 2)
-
-            if result == 1:
-                output = f"🚫 Spam ({confidence}%)"
-            else:
-                output = f"✅ Not Spam ({confidence}%)"
-
-        except Exception as e:
-            output = "❌ Error processing input"
-            print("Prediction error:", e)
-
-        # save history
-        history.insert(0, (message, output))
-        history = history[:5]
-
-        return render_template("index.html", prediction=output, history=history)
-
-    return render_template("index.html", prediction=None, history=history)
-
-# -----------------------------
-# API ROUTE
-# -----------------------------
+# ---- REAL-TIME API ----
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.get_json()
+    message = data.get("message", "")
 
-    if not data or "message" not in data:
-        return jsonify({"error": "No message provided"}), 400
+    if not message.strip():
+        return jsonify({"error": "Empty message"}), 400
 
-    try:
-        message = data.get("message")
-        cleaned = clean_text(message)
-        vector = vectorizer.transform([cleaned])
+    cleaned = clean_text(message)
+    vector = vectorizer.transform([cleaned])
 
-        result = model.predict(vector)[0]
+    result = model.predict(vector)[0]
+    prob = model.predict_proba(vector)[0]
+    confidence = round(max(prob) * 100, 2)
 
-        return jsonify({"prediction": "Spam" if result == 1 else "Ham"})
+    label = "Spam" if result == 1 else "Ham"
+    pretty = f"{'🚫 Spam' if result == 1 else '✅ Not Spam'} ({confidence}%)"
 
-    except Exception as e:
-        print("API error:", e)
-        return jsonify({"error": "Prediction failed"}), 500
+    # update stats
+    stats["total"] += 1
+    if result == 1:
+        stats["spam"] += 1
+    else:
+        stats["ham"] += 1
 
-# -----------------------------
-# RUN APP
-# -----------------------------
+    return jsonify({
+        "label": label,
+        "pretty": pretty,
+        "confidence": confidence,
+        "stats": stats
+    })
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)

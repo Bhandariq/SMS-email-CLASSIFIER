@@ -69,20 +69,25 @@ nav{
   gap:10px;
 }
 
-textarea{
-  flex:1;
-  padding:10px;
-  border-radius:8px;
-  border:none;
+/* Input box bigger by 6px */
+textarea {
+  flex: 1;
+  padding: 16px;        /* was 10px → +6px */
+  font-size: 18px;      /* thoda bada text */
+  border-radius: 8px;
+  border: none;
 }
 
-button{
-  padding:10px 15px;
-  border:none;
-  border-radius:8px;
-  background:#3b82f6;
-  color:#fff;
-  cursor:pointer;
+/* Send button bigger by 5px */
+button {
+  padding: 15px 20px;   /* was 10px 15px → +5px */
+  font-size: 17px;      /* thoda bada text */
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .dashboard{

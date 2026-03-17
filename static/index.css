@@ -1,119 +1,170 @@
-body {
-  background-color: #000000;
-  color: white;
-  font-family: Arial, sans-serif;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  height: 100vh;
+/* RESET */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
-.main{
+
+/* BODY */
+body {
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: white;
+  min-height: 100vh;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  align-items: center;
+}
+
+nav h2 {
+  font-weight: 600;
+}
+
+.nav-btns button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-btns button:hover {
+  background: white;
+  color: black;
+}
+
+/* MAIN CENTER */
+.main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
-  /* background-color: aqua; */
+  min-height: 80vh;
 }
 
-.container {
-  width: 60vw;
-  height: 50vh;
-  padding: 20px;
-  background-color: #1e1e1e;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #333;
+/* CARD */
+.card {
+  width: 600px;
+  padding: 30px;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  transition: 0.3s;
 }
 
-h1 {
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* TITLE */
+.card h1 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-label {
-  display: block;
-  margin-bottom: 10px;
-}
-
+/* TEXTAREA */
 textarea {
-  width: 98%;
-  height: 200px;
-  padding: 10px;
-  border-radius: 5px;
+  width: 100%;
+  height: 150px;
+  padding: 12px;
+  border-radius: 8px;
   border: none;
-  resize: none;
-  margin-bottom: 15px;
-  background-color: #2e2e2e;
+  background: #1e293b;
   color: white;
+  margin-bottom: 20px;
+  font-size: 14px;
+  outline: none;
 }
 
-button {
-  width: 50%;
-  height: 2.9rem;
-  padding: 10px;
-  background-color: #007bff;
+textarea:focus {
+  border: 1px solid #3b82f6;
+}
+
+/* BUTTON */
+.predict-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transform: translatex(50%);
+  transition: 0.3s;
 }
 
-button:hover {
-  background-color: #0056b3;
+.predict-btn:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
 }
 
+/* RESULT */
 .result-box {
-  margin-top: 15px;
-  padding: 10px;
+  margin-top: 20px;
   text-align: center;
-  border-radius: 5px;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
 .spam {
-  background-color: #ff4d4d;
-  font-size: 38px;
+  background: #dc2626;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 20px;
 }
 
-.not-spam {
-  background-color: #4da6ff;
-    font-size: 38px;
+.ham {
+  background: #16a34a;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 20px;
 }
-nav{
+
+/* HISTORY */
+.history {
+  margin-top: 25px;
+}
+
+.history h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history li {
+  background: rgba(255,255,255,0.05);
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  
+  font-size: 14px;
+  transition: 0.2s;
 }
-nav img{
-  height: 150px;
 
+.history li:hover {
+  background: rgba(255,255,255,0.1);
 }
-.register button{
-  /* margin-right: 10px; */
-  padding: 10px 20px;
-  width: 150px;
-  height: 50px;
-  font-size: 16px;
-  border: 2px solid white;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #000000;
-  color: white;
-  
 
-} 
-.register button:hover{
-  background-color: white;
-  color: black;
-}
-.register{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  width:400px;
-  /* background-color: aqua; */
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

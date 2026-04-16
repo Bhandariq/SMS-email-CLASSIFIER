@@ -117,20 +117,11 @@ This flowchart shows the journey from **user input → preprocessing → model p
 
 ---
 
-## 📊 Tech Stack
-- **Python** (Flask, scikit-learn, pandas, NumPy)  
-- **HTML/CSS/JavaScript** (Frontend)  
-- **Machine Learning** (Naive Bayes Classifier)  
+## 👨‍💻 Author
+Developed by **[Bhandariq](https://github.com/Bhandariq)**  
 
 ---
 
-## 📜 License
-This project is licensed under the **MIT License**.  
-Feel free to use, modify, and distribute with attribution.
+👉 This version is **professional, detailed, and beginner-friendly**, with clear steps and placeholders for screenshots.  
 
----
 
-## 🙌 Contributors
-- **Rohit Bhandari** – Creator & Maintainer
-
----

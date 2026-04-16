@@ -1,110 +1,136 @@
 # 📧 SMS & Email Classifier
 
 A machine learning project that classifies SMS messages and emails as **Spam** or **Ham (legitimate)**.  
-It combines **data preprocessing, model training, and deployment via Flask** into a complete end-to-end solution.
+This end-to-end solution combines **data preprocessing**, **model training**, and **deployment via Flask**, making it simple to test and use in real-world scenarios.
 
 ---
 
-## ✨ Features
-- 🔍 **Spam Detection** using **Naive Bayes**  
-- 🧹 **Text Preprocessing**: cleaning, tokenization, stopword removal, vectorization  
-- 💾 **Model Persistence**: trained model (`NB_spam_model.pkl`) and transformer (`transform.pkl`) saved for reuse  
-- 🌐 **Web Interface**: Flask app with simple UI for testing messages  
-- 📊 **Exploratory Data Analysis (EDA)** included in Jupyter Notebook  
+## 🚀 Features
+- **Spam/Ham Classification**: Detects whether a message is spam or legitimate.  
+- **Pre-trained Model**: Uses a Naive Bayes classifier trained on a large dataset.  
+- **Web Interface**: Flask-powered frontend for easy interaction.  
+- **Dataset Expansion**: Includes a script to generate larger datasets for experimentation.  
+- **Deployment Ready**: Configured with `Procfile`, `requirements.txt`, and `runtime.txt` for platforms like Render/Heroku.  
+- **Real-Time Prediction**: User inputs are classified instantly via the web app.  
 
 ---
 
 ## 📂 Project Structure
-```plaintext
-SMS-email-CLASSIFIER/
-│
-├── sms-detector-EDA.ipynb    # Dataset exploration & visualization
-├── model_creation.py         # Training script for Naive Bayes model
-├── server.py                 # Flask server for deployment
-├── spam_data.csv             # Dataset (SMS/email samples)
-├── NB_spam_model.pkl         # Trained model
-├── transform.pkl             # Text transformer (vectorizer)
-├── requirements.txt          # Dependencies
-│
-├── templates/                # HTML templates for frontend
-│   └── index.html
-│
-└── static/                   # CSS/JS files for styling
+```
+SMS-Email-Classifier/
+│── static/                  # CSS, JS, and static assets
+│── templates/               # HTML templates for Flask
+│── venv/                    # Virtual environment (optional)
+│── NB_spam_model.pkl        # Trained Naive Bayes model
+│── transform.pkl            # Preprocessing transformer
+│── spam_data.csv            # Dataset used for training
+│── model_creation.py        # Script for training the model
+│── generate_big_dataset.py  # Script to expand dataset
+│── server.py                # Flask app entry point
+│── requirements.txt         # Python dependencies
+│── Procfile                 # Deployment instructions
+│── runtime.txt              # Python runtime version
+│── README.md                # Project documentation
+│── LICENSE                  # MIT License
 ```
 
 ---
 
 ## ⚙️ Installation & Setup
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Bhandariq/SMS-email-CLASSIFIER.git
-   cd SMS-email-CLASSIFIER
-   ```
 
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/SMS-Email-Classifier.git
+cd SMS-Email-Classifier
+```
 
-3. **Run the Flask server**
-   ```bash
-   python server.py
-   ```
+### 2. Create a virtual environment
+```bash
+python -m venv venv
+source venv/bin/activate   # On Linux/Mac
+venv\Scripts\activate      # On Windows
+```
 
-4. **Open in browser**  
-   Visit: `http://127.0.0.1:5000/`
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
 
----
+### 4. Run the Flask server
+```bash
+python server.py
+```
 
-## 🖥️ Usage Example
-- Enter an SMS or email text in the input box.  
-- Click **Classify**.  
-- The app will return either:
-  - ✅ **Ham** → Legitimate message  
-  - 🚫 **Spam** → Unwanted/advertisement message  
-
----
-
-## 📊 Workflow
-1. **Data Preprocessing**
-   - Lowercasing, punctuation removal, stopword filtering  
-   - Vectorization using `CountVectorizer`  
-
-2. **Model Training**
-   - Naive Bayes classifier trained on `spam_data.csv`  
-
-3. **Model Saving**
-   - Model and transformer saved as `.pkl` files  
-
-4. **Deployment**
-   - Flask app loads saved model and transformer  
-   - User inputs are classified in real-time  
+The app will be available at:  
+👉 `https://sms-email-classifier-p93k.onrender.com/`
 
 ---
 
-## 📸 Screenshots  
-Example:
-- **Homepage UI**
-- <img width="1895" height="926" alt="image" src="https://github.com/user-attachments/assets/7f6455fc-d800-4cb8-acff-1fadf2fe950c" />
+## 🧠 Model Training
+If you want to retrain the model:
+```bash
+python model_creation.py
+```
+- Uses `spam_data.csv` for training.  
+- Saves the trained model as `NB_spam_model.pkl`.  
+- Saves preprocessing pipeline as `transform.pkl`.
 
-- **Classification Result Page**
-<img width="1862" height="873" alt="image" src="https://github.com/user-attachments/assets/2431b7b6-5117-473a-87ad-721ac4e24908" />
-
----
-
-## 🔮 Future Improvements
-- Integrate **deep learning models** (LSTM, Transformers)  
-- Add **real-time email integration** (e.g., Gmail API)  
-- Improve UI with modern frameworks (React, Bootstrap)  
-- Expand dataset for multilingual spam detection  
+To expand the dataset:
+```bash
+python generate_big_dataset.py
+```
 
 ---
 
-## 👨‍💻 Author
-Developed by **[Bhandariq](https://github.com/Bhandariq)**  
+## 🌐 Deployment
+This project is deployment-ready with:
+- **Procfile** → Defines the app entry point.  
+- **requirements.txt** → Lists dependencies.  
+- **runtime.txt** → Specifies Python version.  
+
+You can deploy easily on **Render**, **Heroku**, or similar platforms.  
+Once deployed, the app loads the saved model and transformer, classifying user inputs in real-time.
 
 ---
 
-👉 This version is **professional, detailed, and beginner-friendly**, with clear steps and placeholders for screenshots.  
+## 📸 Project Preview
+Here’s a look at the application interface:
 
+`[Looks like the result wasn't safe to show. Let's switch things up and try something else!]`
 
+---
+
+## 🔄 Process Flowchart
+
+```mermaid
+flowchart TD
+    A[User Input: SMS/Email] --> B[Preprocessing with transform.pkl]
+    B --> C[Model Prediction using NB_spam_model.pkl]
+    C --> D{Classification Result}
+    D -->|Spam| E[Output: Spam]
+    D -->|Ham| F[Output: Ham]
+    E --> G[Display Result on Flask UI]
+    F --> G[Display Result on Flask UI]
+```
+
+This flowchart shows the journey from **user input → preprocessing → model prediction → classification result → UI output**.
+
+---
+
+## 📊 Tech Stack
+- **Python** (Flask, scikit-learn, pandas, NumPy)  
+- **HTML/CSS/JavaScript** (Frontend)  
+- **Machine Learning** (Naive Bayes Classifier)  
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License**.  
+Feel free to use, modify, and distribute with attribution.
+
+---
+
+## 🙌 Contributors
+- **Rohit Bhandari** – Creator & Maintainer
+
+---
